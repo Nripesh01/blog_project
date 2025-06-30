@@ -16,7 +16,7 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post':post})
   
-
+  
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -29,51 +29,61 @@ def post_create(request):
         form = PostForm()
     return render(request, 'blog/post_form.html', {'form':form})
 
-
 def post_edit(request, pk):
-    post = Post.objects.all(Post, pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     if post.user != request.user:
         return redirect('post_detail', pk=pk)
     
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
-            post = form.save()
+            form.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_form.html', {'form':form})
-        
-            
+    return render(request, 'blog/post_edit.html', {'form':form})
+
+
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if post.user == request.user:
+    if post.user != request.user:
+       return redirect('post_detail', pk=pk)
+    
+    if request.method == 'POST':
         post.delete()
-    return redirect('post_list')
-
-
+        return redirect('post_list')
+    return render(request, 'blog/post_delete.html', {'post':post})    
+    
 def post_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            post = form.save()
-            login(request, post)
-            messages.success(request, "You have successfully logged-in")
-            return redirect('')
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, "You have successfully login")
+            return redirect('post_list')
         else:
-            messages.error(request, "You are invalid sorry")
+            messages.error(request, "You are invalid, Sorry")
     else:
         form = AuthenticationForm()
     return render(request, 'blog/post_login.html', {'form':form})
+
 
 def post_register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            post = form.save()
-            login(request, post)
-            messages.success(request, "You have register successfully")
-            return redirect('')
+            user = form.save()
+            login(request, user)
+            messages.success(request, "You have created register successfully")
+            return redirect('post_list')
+        else:
+            messages.success(request, "Registration failed")
     else:
         form = UserCreationForm()
     return render(request, 'blog/post_register.html', {'form':form})
+
+
+def post_logout(request):
+    logout(request)
+    return redirect('post_list')

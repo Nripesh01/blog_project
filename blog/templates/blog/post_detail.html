@@ -7,11 +7,14 @@
     <h1>{{ post.title }}</h1>
 <p>{{ post.content|linebreaks }}</p>
 
-{% if user == post.author %}
-    <p>
-        <a href="{% url 'post_edit' post.pk %}">Edit</a> |
-        <a href="{% url 'post_delete' post.pk %}">Delete</a>
-    </p>
+{% if user.is_authenticated and user == post.author %}
+  <a href="{% url 'post_edit' post.pk %}">Edit</a>
+  |
+  <form action="{% url 'post_delete' post.pk %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+  </form>
 {% endif %}
+
 </body>
 </html>
