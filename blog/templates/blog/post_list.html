@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blog</title>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+    <ul>
+    {% for post in posts %}
+        <li>
+            <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+            <small>by {{ post.user.username }} on {{ post.created_at|date:"F j, Y" }}</small>
+        </li>
+    {% empty %}
+        <li>No posts yet.</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
+{% if user.is_authenticated %}
+    <p><a href="{% url 'post_create' %}">Create Post</a></p>
+{% endif %}
