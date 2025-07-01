@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ post.title }}</title>
-</head>
-<body>
-    <h1>{{ post.title }}</h1>
-<p>{{ post.content|linebreaks }}</p>
+{% extends 'blog/base.html' %}
 
-{% if user.is_authenticated and user == post.author %}
-  <a href="{% url 'post_edit' post.pk %}">Edit</a>
-  |
-  <form action="{% url 'post_delete' post.pk %}" method="post" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
-  </form>
-{% endif %}
+{% block content %}
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.content|linebreaks }}</p>
 
-</body>
-</html>
+  {% if user.is_authenticated and user == post.user %}
+    <a href="{% url 'post_edit' post.pk %}">Edit</a> |
+    <form action="{% url 'post_delete' post.pk %}" method="post" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+    </form>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <div class="home-container">
+    <h1>Welcome to the Blog App</h1>
+    <p>This is a simple blogging platform where you can create, view, edit, and delete your posts.</p>
+
+    {% if user.is_authenticated %}
+      <p>You are logged in as {{ user.username }}. Go to <a href="{% url 'post_list' %}">Post List</a>.</p>
+    {% else %}
+    {% endif %}
+  </div>
+{% endblock %}

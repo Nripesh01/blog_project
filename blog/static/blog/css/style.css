@@ -1,0 +1,161 @@
+/* General resets and font */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
+  margin: 0;
+  padding: 0 15px;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Container for all pages */
+.home-container, .content-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h1, h2 {
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* Forms */
+form {
+  margin-bottom: 20px;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+/* Buttons */
+button {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #004a99;
+}
+
+/* Links in forms */
+p a {
+  color: #0066cc;
+  font-weight: 600;
+}
+
+/* Post List */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+/* Post detail */
+.post-detail h1 {
+  margin-bottom: 10px;
+}
+
+.post-detail p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  white-space: pre-line;
+}
+
+/* Edit/Delete buttons */
+.post-detail a.btn, .post-detail button {
+  display: inline-block;
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.post-detail a.btn {
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+}
+
+.post-detail a.btn:hover {
+  background-color: #0056b3;
+}
+
+.post-detail button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+}
+
+.post-detail button:hover {
+  background-color: #a71d2a;
+}
+
+/* Search form */
+form input[type="text"] {
+  width: auto;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* Messages list */
+ul.messages {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+ul.messages li {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .home-container, .content-container {
+    padding: 15px;
+  }
+}
